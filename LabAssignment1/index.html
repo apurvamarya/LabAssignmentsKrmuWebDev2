@@ -2,10 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Smart Event Dashboard</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <script src="./script.js"></script>
+
+<header>
+     Smart Event Dashboard
+</header>
+
+
+<main class="top-section">
+
+    <!-- Add Event Card -->
+    <div class="card">
+        <h3>Add New Event</h3>
+
+        <label>Event Title</label>
+        <input type="text" id="title">
+
+        <label>Event Date</label>
+        <input type="date" id="date">
+
+        <label>Category</label>
+        <select id="category">
+            <option>Conference</option>
+            <option>Workshop</option>
+            <option>Social</option>
+        </select>
+
+        <label>Description</label>
+        <textarea id="desc"></textarea>
+
+        <button id="addBtn">Add Event</button>
+    </div>
+
+    <!-- Events Card -->
+    <div class="card large">
+        <h3>My Events</h3>
+
+        <div class="actions">
+            <button id="clearBtn">Clear All Events</button>
+            <button id="sampleBtn">Add Sample Events</button>
+        </div>
+
+        <div id="eventList"></div>
+    </div>
+
+</main>
+
+<script src="./script.js"></script>
 </body>
 </html>
