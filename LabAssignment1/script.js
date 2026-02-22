@@ -6,29 +6,13 @@ const addBtn = document.querySelector("#addBtn");
 const eventList = document.querySelector("#eventList");
 const clearBtn = document.querySelector("#clearBtn");
 const sampleBtn = document.querySelector("#sampleBtn");
-const searchInput = document.querySelector("#searchInput");
 
-// let events = [];
-let events = JSON.parse(localStorage.getItem("events")) || [];
-let editIndex = null;
-
-function saveEvents() {
-    localStorage.setItem("events", JSON.stringify(events));
-}
+let events = [];
 
 function renderEvents(){
-    eventList.innerHTML = "";
+    eventList.innerHTML = "";53
 
-    const searchTerm = searchInput.value.toLowerCase();
-    const today = new Date().toISOString().split("T")[0];
-
-    let filteredEvents = events.filter(e =>
-        e.title.toLowerCase().includes(searchTerm)
-    );
-
-    filteredEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-    filteredEvents.forEach((e, i)=>{
+    events.forEach((e, i)=>{
         const div = document.createElement("div");
         div.className = "event";
 
@@ -38,66 +22,35 @@ function renderEvents(){
             <p>${e.date}</p>
             <span>${e.category}</span>
             <p>${e.desc}</p>
-            <button onclick="editEvent(${i})">Edit</button>
-            `;
-            
-            eventList.appendChild(div);
-        });
-}
+        `;
 
-searchInput.addEventListener("input", renderEvents);
+        eventList.appendChild(div);
+    });
+}
 
 addBtn.addEventListener("click", ()=>{
     if(title.value === "" || date.value === "") return;
 
-    if (editIndex == null) {
+    events.push({
+        title: title.value,
+        date: date.value,
+        category: category.value,
+        desc: desc.value
+    });
 
-        events.push({
-            title: title.value,
-            date: date.value,
-            category: category.value,
-            desc: desc.value
-        });
-    } else {
-        events[editIndex] = {
-            title: title.value,
-            date: date.value,
-            category: category.value,
-            desc: desc.value
-        };
-        editIndex = null;
-        addBtn.textContent = "Add Event";
-    }
-
-    saveEvents();
     renderEvents();
-
     title.value = "";
     date.value = "";
     desc.value = "";
 });
 
-function editEvent(i) {
-    const event = events[i];
-
-    title.value = event.title;
-    date.value = event.date;
-    category.value = event.category;
-    desc.value = event.desc;
-
-    editIndex = i;
-    addBtn.textContent = "Update Event";
-}
-
 function deleteEvent(i){
     events.splice(i,1);
-    saveEvents()
     renderEvents();
 }
 
 clearBtn.onclick = ()=> {
     events = [];
-    saveEvents();
     renderEvents();
 };
 
@@ -108,8 +61,5 @@ sampleBtn.onclick = ()=> {
         category:"Sample Category",
         desc:"Sample event description."
     });
-    saveEvents();
     renderEvents();
 };
-
-renderEvents();
