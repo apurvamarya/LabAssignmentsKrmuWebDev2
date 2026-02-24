@@ -33,7 +33,7 @@ function historyList(cityName){
 }
 
 function apiCall(cityName){
-    api = "http://api.weatherapi.com/v1/current.json?key=5a2e90b65af04c8e9d682732262402&q=city&aqi=no"
+    api = "https://api.weatherapi.com/v1/current.json?key=5a2e90b65af04c8e9d682732262402&q=city&aqi=no"
     fetch(api.replace("city",cityName))
     .then(res => res.json())
     .then(data => {
