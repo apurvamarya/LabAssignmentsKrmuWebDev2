@@ -20,7 +20,7 @@ h1{
     text-align: center;
 }
 
-/* Main container */
+/* MAIN CONTAINER */
 #container{
     background-color: white;
     padding: 20px;
@@ -32,7 +32,7 @@ h1{
     gap: 20px;
 }
 
-/* Left side */
+/* LEFT SIDE */
 #searchContainer{
     background-color: rgb(72, 159, 225);
     border-radius: 10px;
@@ -40,21 +40,19 @@ h1{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 10px;
-}
-
-#search,
-#history{
-    background-color: rgb(72, 159, 225);
-    border-radius: 10px;
     padding: 15px;
 }
 
-/* History list */
+#search, #history{
+    background-color: rgb(72, 159, 225);
+    border-radius: 10px;
+}
+
 #historyList{
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    padding: 10px 0;
 }
 
 .listItem{
@@ -63,7 +61,7 @@ h1{
     padding: 5px 10px;
 }
 
-/* Right side */
+/* RIGHT SIDE */
 #result{
     background-color: rgb(72, 159, 225);
     flex: 1;
@@ -73,56 +71,56 @@ h1{
     flex-direction: column;
 }
 
-/* Text spacing */
-h3, p{
+h3{
     margin-bottom: 15px;
 }
 
-/* Input & Button */
+p{
+    margin: 8px 0;
+}
+
+/* INPUT + BUTTON */
+#search{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 #search input{
     height: 45px;
     width: 100%;
-    max-width: 280px;
-    margin-bottom: 10px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
-    padding: 10px;
 }
 
 #search button{
     height: 45px;
-    width: 120px;
+    width: 100%;
     background-color: rgb(241, 157, 32);
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-/* Result items */
+/* RESULT ITEMS */
 .resultItem{
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    border-top: 1px solid rgba(255,255,255,0.4);
+    padding: 8px 0;
 }
 
-/* ---------------- MOBILE ---------------- */
+/* ------------------ MOBILE ------------------ */
 @media (max-width: 768px){
 
     #container{
         flex-direction: column;
     }
 
-    #search input{
-        max-width: 100%;
-    }
-
-    #search button{
-        width: 100%;
-    }
-
     .resultItem{
         flex-direction: column;
-        align-items: flex-start;
+        gap: 4px;
     }
 }
