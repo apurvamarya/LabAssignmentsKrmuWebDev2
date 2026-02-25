@@ -8,21 +8,36 @@ const windSpeed = document.querySelector("#windSpeed")
 const pressure = document.querySelector("#pressure")
 const precipitation = document.querySelector("#precipitation")
 
-let cityNameList = []
+let cityNameList = JSON.parse(localStorage.getItem("cityNameList")) || [];
+
+cityNameList.forEach(city => {
+    historyList(city);
+});
 
 search.addEventListener("click", () => {
-    let cityName = input.value;
+
+    let cityName = input.value.trim();
+
     if (cityName === ""){
         alert("Please enter a city name");
         return;
     }
-    cityNameList.push(cityName);
-    localStorage.setItem("cityNameList", JSON.stringify(cityNameList));
-    cityNameList = JSON.parse(localStorage.getItem("cityNameList"));
-    // console.log(cityNameList);
+
+    cityName = cityName.toLowerCase();
+    const lastCity = cityNameList[cityNameList.length - 1];
+
+    if (lastCity !== cityName){
+
+        cityNameList.push(cityName);
+        localStorage.setItem("cityNameList", JSON.stringify(cityNameList));
+        cityNameList = JSON.parse(localStorage.getItem("cityNameList"));
+        historyList(cityName);
+
+    }
+
     apiCall(cityName);
-    historyList(cityName);
     input.value = "";
+
 })
 
 function historyList(cityName){
@@ -30,6 +45,10 @@ function historyList(cityName){
     listItem.setAttribute("class", "listItem");
     listItem.innerHTML = cityName;
     history.appendChild(listItem);
+    listItem.addEventListener("click", ()=>{
+        input.value = listItem.innerText
+    })
+
 }
 
 function apiCall(cityName){
@@ -48,3 +67,7 @@ function apiCall(cityName){
     })
     .catch(err => console.error(err));
 }
+
+
+
+
